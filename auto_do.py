@@ -256,7 +256,7 @@ class plng_in():
             self.run=webdriver.Chrome(executable_path=self.PATH+".\\data\\chromedriver.exe",chrome_options=self.chrome_options)
 
         self.run.maximize_window()
-        #self.run.set_page_load_timeout(10)
+        self.run.set_page_load_timeout(10)
         url="http://www.ratatype.com/login/"
         self.run.get(url)
         sleep(15)
