@@ -14,23 +14,23 @@ def __init__(self) :
     self.chrome_options.add_argument('blink-settings=imagesEnabled=false')
 ```
 * **Controller**
-  * data\_login_e
+  * data_login_e
   * data_login
 
 
 * **View**
-  * start
-  * restart
-  * close
-  * \_msgbox
-  * input_start
-  * error
+  * _start
+  * _restart
+  * _close
+  * _msgbox
+  * _input_start
+  * _error
 
 * **Model**
-  * \_date
-  * **\_exit**
+  * _date
+  * **_exit**
   * login
   * keystart
-  * entry\_word
-  * entry\_key
+  * entry_word
+  * entry_key
 

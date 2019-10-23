@@ -27,9 +27,8 @@ class plng_in():
         self.chrome_options.add_argument('--disable-gpu')
         self.chrome_options.add_argument('--hide-scrollbars')
         self.chrome_options.add_argument('blink-settings=imagesEnabled=false')
-        #self.chrome_options.add_argument('--headless')
-        
-    def start(self):
+
+    def _start(self):
         self._msgbox()
 
     def _date(self):
@@ -91,7 +90,7 @@ class plng_in():
         lab2.pack()
         lab3.pack()
         btn.pack()
-        btn1=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.input_start)
+        btn1=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self._input_start)
         btn2=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self._exit)
         btn1.pack(side="left",padx=5)
         btn2.pack(side="right")
@@ -99,7 +98,7 @@ class plng_in():
         self.msgbox.mainloop()
 
 
-    def input_start(self):
+    def _input_start(self):
         try:
             self.msgbox.destroy()
         except:
@@ -133,9 +132,54 @@ class plng_in():
         self.start.geometry("%dx%d+%d+%d"%(250,115,((self.start.winfo_screenwidth()/2)-(250/2)),((self.start.winfo_screenheight()/2)-(115/2))))
         self.msgbox.mainloop()
 
-        def settings(self):
+    def _restart(self):
+        self._tkerror.destroy()
+        self._input_start()
+
+
+
+    def _close(self) :
+        try:
+            self.run.quit()
+        except:
             pass
-            self.set=tk.TK()
+        self.close=tk.Tk()
+        self.close.title("完成")
+        try:
+            self.close.iconbitmap(".\\data\\ico\\war.ico")
+        except:
+            self.close.iconbitmap(self.PATH+".\\data\\ico\\war.ico")
+        frm=tk.Frame(self.close)
+        frm.pack(side="right",padx=5)
+        lab=tk.Frame(frm)
+        btn=tk.Frame(frm)
+        img=tk.Frame(self._close)
+        img.pack(side="left",padx=5)
+        try:
+            image_=tk.PhotoImage(file=".\\data\\png\\war.png")
+        except:
+            image_=tk.PhotoImage(file=self.PATH+"\\data\\png\\war.png")
+        img1=tk.Label(img,image=image_)
+        img1.pack()
+        lab.pack()
+        lab1=tk.Label(lab,text="完成",font=("微軟正黑體",12))
+        lab2=tk.Label(lab,text="您已完成",font=("微軟正黑體",12))
+        lab3=tk.Label(lab,text="要繼續嗎？",font=("微軟正黑體",12))
+        lab1.pack()
+        lab2.pack()
+        lab3.pack()
+        btn.pack()
+        btn1=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.is_)
+        btn2=tk.Button(btn,text="關閉",font=("微軟正黑體",12),command=self._exit)
+        btn1.pack(side="left",padx=5)
+        btn2.pack(side="right")
+        self.close.geometry("%dx%d+%d+%d"%(220,115,((self.close.winfo_screenwidth()/2)-(220/2)),((self.close.winfo_screenheight()/2)-(115/2))))
+        self.close.mainloop()
+
+
+    def settings(self):
+        pass
+        self.set=tk.Tk()
 
 
 
@@ -176,16 +220,14 @@ class plng_in():
         lab3.pack()
         lab4.pack()
         btn.pack()
-        btn1=tk.Button(btn,text="重新啟動",font=("微軟正黑體",12),command=self.restart)
+        btn1=tk.Button(btn,text="重新啟動",font=("微軟正黑體",12),command=self._restart)
         btn2=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self._exit)
         btn1.pack(side="left",padx=5)
         btn2.pack(side="right")
         self._tkerror.geometry("%dx%d+%d+%d"%(250,150,((self._tkerror.winfo_screenwidth()/2)-(250/2)),((self._tkerror.winfo_screenheight()/2)-(150/2))))
         self._tkerror.mainloop()
 
-    def restart(self):
-        self._tkerror.destroy()
-        self.input_start()
+
 
     def entry_word(self,css_selector,word,wait_sec) :
         #輸入文字
@@ -259,59 +301,12 @@ class plng_in():
         sleep(2)
         self.run.save_screenshot(".\\data\\finish image\\{}.png".format(self._date()))
         sleep(1)
-        self.close()
+        self._close()
         #os.exit_(1)
 
-
-
-
-
-    def close(self) :
-        try:
-            self.run.quit()
-        except:
-            pass
-        self._close=tk.Tk()
-        self._close.title("完成")
-        try:
-            self._close.iconbitmap(".\\data\\ico\\war.ico")
-        except:
-            self._close.iconbitmap(self.PATH+".\\data\\ico\\war.ico")
-        frm=tk.Frame(self._close)
-        frm.pack(side="right",padx=5)
-        lab=tk.Frame(frm)
-        btn=tk.Frame(frm)
-        img=tk.Frame(self._close)
-        img.pack(side="left",padx=5)
-        try:
-            image_=tk.PhotoImage(file=".\\data\\png\\war.png")
-        except:
-            image_=tk.PhotoImage(file=self.PATH+"\\data\\png\\war.png")
-        img1=tk.Label(img,image=image_)
-        img1.pack()
-        lab.pack()
-        lab1=tk.Label(lab,text="完成",font=("微軟正黑體",12))
-        lab2=tk.Label(lab,text="您已完成",font=("微軟正黑體",12))
-        lab3=tk.Label(lab,text="要繼續嗎？",font=("微軟正黑體",12))
-        lab1.pack()
-        lab2.pack()
-        lab3.pack()
-        btn.pack()
-        btn1=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.is_)
-        btn2=tk.Button(btn,text="關閉",font=("微軟正黑體",12),command=self._exit)
-        btn1.pack(side="left",padx=5)
-        btn2.pack(side="right")
-        self._close.geometry("%dx%d+%d+%d"%(220,115,((self._close.winfo_screenwidth()/2)-(220/2)),((self._close.winfo_screenheight()/2)-(115/2))))
-        self._close.mainloop()
-
-
-
-
-
-
     def is_(self):
-        self._close.destroy()
-        self.input_start()
+        self.close.destroy()
+        self._input_start()
 
 
 
