@@ -28,6 +28,8 @@ class plng_in():
         self.chrome_options.add_argument('--hide-scrollbars')
         self.chrome_options.add_argument('blink-settings=imagesEnabled=false')
         #self.chrome_options.add_argument('--headless')
+        
+    def start(self):
         self._msgbox()
 
     def _date(self):
