@@ -6,34 +6,50 @@
 ### class Autocompleter()
 * **\_\_init\_\_**
 * **控制器**
-  * data_login_e()
+  * data_login_e(event)
   * data_login()
 
 * **使用者介面**
-  * _start()
-  * _restart()
-  * _close()
-  * _msgbox()
-  * _input_start()
-  * _error()
+  * start()
+  * restart()
+  * close()
+  * msgbox()
+  * input_start()
+  * error()
 
 * **模組**
   * _date()
   * _exit()
-  * login()
+  * login(email,password)
   * keystart()
-  * entry_word()
-  * entry_key()
+  * entry_word(css_selector,word,wait_sec)
+  * entry_key(word,WPM)
 
 # 使用須知
 ## **模組相依性**
-__此程式會用到下列模組：__
-* time
+__此程式會用到下列模組和函式：__
+* __time__
 * selenium
-* bs4
+  *  __webdriver__
+    * common
+      * exceptions
+        * NoSuchElementException
+      * by
+        * __By__
+      * action_chains
+        * __ActionChains__
+    * support
+      * __expected_conditions__
+      * wait
+        * __WebDriverWait__
+
+
+
+* bs4  BeautifulSoup
+* time
 * json
-* os
 * os.path
+* os
 * sys
 * tkinter
 * re

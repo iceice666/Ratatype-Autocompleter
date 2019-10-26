@@ -1,4 +1,3 @@
-from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -13,11 +12,12 @@ import os
 import sys
 import tkinter as tk
 import re
+import subprocess
 #            ----------------------  plng_in class START   ----------------------
 
-__version__="v.1.1.3_64bit_no_headless"
+__version__="v.1.2_64bit"
 
-class plng_in():
+class Autocompleter():
 
     def __init__(self) :
         #PATH
@@ -27,9 +27,17 @@ class plng_in():
         self.chrome_options.add_argument('--disable-gpu')
         self.chrome_options.add_argument('--hide-scrollbars')
         self.chrome_options.add_argument('blink-settings=imagesEnabled=false')
+        fnull = open(os.devnull, 'w')
+        return1 = subprocess.call('ping 8.8.8.8', shell = True, stdout = fnull, stderr = fnull)
+        if return1:
+            self.error("網路異常")
+        else:
+            print 'ping ok'
+        fnull.close()
+ 
 
-    def _start(self):
-        self._msgbox()
+    def start(self):
+        self.msgbox()
 
     def _date(self):
         #date
@@ -62,19 +70,19 @@ class plng_in():
         finally:
             os._exit(1)
 
-    def _msgbox(self):
+    def msgbox(self):
         #tk
-        self.msgbox=tk.Tk()
-        self.msgbox.title("警告")
+        self._msgbox=tk.Tk()
+        self._msgbox.title("警告")
         try:
-            self.msgbox.iconbitmap(".\\data\\ico\\war.ico")
+            self._msgbox.iconbitmap(".\\data\\ico\\war.ico")
         except:
-            self.msgbox.iconbitmap(self.PATH+".\\data\\ico\\war.ico")
-        frm=tk.Frame(self.msgbox)
+            self._msgbox.iconbitmap(self.PATH+".\\data\\ico\\war.ico")
+        frm=tk.Frame(self._msgbox)
         frm.pack(side="right",padx=5)
         lab=tk.Frame(frm)
         btn=tk.Frame(frm)
-        img=tk.Frame(self.msgbox)
+        img=tk.Frame(self._msgbox)
         img.pack(side="left",padx=5)
         try:
             image_=tk.PhotoImage(file=".\\data\\png\\war.png")
@@ -90,29 +98,29 @@ class plng_in():
         lab2.pack()
         lab3.pack()
         btn.pack()
-        btn1=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self._input_start)
+        btn1=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.input_ep)
         btn2=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self._exit)
         btn1.pack(side="left",padx=5)
         btn2.pack(side="right")
-        self.msgbox.geometry("%dx%d+%d+%d"%(220,115,((self.msgbox.winfo_screenwidth()/2)-(220/2)),((self.msgbox.winfo_screenheight()/2)-(115/2))))
-        self.msgbox.mainloop()
+        self._msgbox.geometry("%dx%d+%d+%d"%(220,115,((self._msgbox.winfo_screenwidth()/2)-(220/2)),((self._msgbox.winfo_screenheight()/2)-(115/2))))
+        self._msgbox.mainloop()
 
 
-    def _input_start(self):
+    def input_ep(self):
         try:
             self.msgbox.destroy()
         except:
             pass
-        self.start=tk.Tk()
-        self.start.title("帳號密碼輸入")
+        self._start=tk.Tk()
+        self._start.title("帳號密碼輸入")
         try:
-            self.start.iconbitmap(".\\data\\ico\\start.ico")
+            self._start.iconbitmap(".\\data\\ico\\start.ico")
         except:
-            self.start.iconbitmap(self.PATH+".\\data\\ico\\start.ico")
+            self._start.iconbitmap(self.PATH+".\\data\\ico\\start.ico")
         self.e_text=tk.StringVar()
         self.p_text=tk.StringVar()
         self.e_text.set("@kmhjh.kh.edu.tw")
-        _input=tk.Frame(self.start)
+        _input=tk.Frame(self._start)
         _input.pack()
         lab1=tk.Label(_input,text="Ratatype帳號密碼輸入",font=("微軟正黑體",12))
         lab2=tk.Label(_input,text="帳號：",font=("微軟正黑體",12))
@@ -125,31 +133,31 @@ class plng_in():
         lab3.grid(row=2,column=0)
         e_entry.grid(row=1,column=1,columnspan=2)
         p_entry.grid(row=2,column=1,columnspan=2)
-        btn=tk.Frame(self.start)
+        btn=tk.Frame(self._start)
         btn.pack()
         btn1=tk.Button(btn,text="開始",font=("微軟正黑體",12),command=self.data_login)
         btn1.pack()
-        self.start.geometry("%dx%d+%d+%d"%(250,115,((self.start.winfo_screenwidth()/2)-(250/2)),((self.start.winfo_screenheight()/2)-(115/2))))
-        self.msgbox.mainloop()
+        self._start.geometry("%dx%d+%d+%d"%(250,115,((self._start.winfo_screenwidth()/2)-(250/2)),((self._start.winfo_screenheight()/2)-(115/2))))
+        self._start.mainloop()
 
-    def _restart(self):
+    def restart(self):
         self._tkerror.destroy()
-        self._input_start()
+        self.input_ep()
 
 
 
-    def _close(self) :
+    def close(self) :
         try:
             self.run.quit()
         except:
             pass
-        self.close=tk.Tk()
-        self.close.title("完成")
+        self._close=tk.Tk()
+        self._close.title("完成")
         try:
-            self.close.iconbitmap(".\\data\\ico\\war.ico")
+            self._close.iconbitmap(".\\data\\ico\\war.ico")
         except:
-            self.close.iconbitmap(self.PATH+".\\data\\ico\\war.ico")
-        frm=tk.Frame(self.close)
+            self._close.iconbitmap(self.PATH+".\\data\\ico\\war.ico")
+        frm=tk.Frame(self._close)
         frm.pack(side="right",padx=5)
         lab=tk.Frame(frm)
         btn=tk.Frame(frm)
@@ -173,22 +181,9 @@ class plng_in():
         btn2=tk.Button(btn,text="關閉",font=("微軟正黑體",12),command=self._exit)
         btn1.pack(side="left",padx=5)
         btn2.pack(side="right")
-        self.close.geometry("%dx%d+%d+%d"%(220,115,((self.close.winfo_screenwidth()/2)-(220/2)),((self.close.winfo_screenheight()/2)-(115/2))))
-        self.close.mainloop()
+        self._close.geometry("%dx%d+%d+%d"%(220,115,((self._close.winfo_screenwidth()/2)-(220/2)),((self._close.winfo_screenheight()/2)-(115/2))))
+        self._close.mainloop()
 
-
-    def settings(self):
-        pass
-        self.set=tk.Tk()
-
-
-
-    def data_login_e(self,event):
-        self.data_login()
-
-    def data_login(self):
-        self.start.destroy()
-        self.login(self.e_text.get(),self.p_text.get())
 
     def error(self,msg):
         self.run.quit()
@@ -220,13 +215,23 @@ class plng_in():
         lab3.pack()
         lab4.pack()
         btn.pack()
-        btn1=tk.Button(btn,text="重新啟動",font=("微軟正黑體",12),command=self._restart)
+        btn1=tk.Button(btn,text="重新啟動",font=("微軟正黑體",12),command=self.restart)
         btn2=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self._exit)
         btn1.pack(side="left",padx=5)
         btn2.pack(side="right")
         self._tkerror.geometry("%dx%d+%d+%d"%(250,150,((self._tkerror.winfo_screenwidth()/2)-(250/2)),((self._tkerror.winfo_screenheight()/2)-(150/2))))
         self._tkerror.mainloop()
 
+    def settings(self):
+        pass
+        self.set=tk.Tk()
+
+    def data_login_e(self,event):
+        self.data_login()
+
+    def data_login(self):
+        self._start.destroy()
+        self.login(self.e_text.get(),self.p_text.get())
 
 
     def entry_word(self,css_selector,word,wait_sec) :
@@ -236,7 +241,7 @@ class plng_in():
         self.run.find_element_by_css_selector(css_selector).clear()
         for entry_key in entry_list :
             self.run.find_element_by_css_selector(css_selector).send_keys(entry_key)
-            sleep(wait_sec)
+            time.sleep(wait_sec)
 
     def entry_key(self,word,WPM):
         word_list=list(word)
@@ -244,7 +249,7 @@ class plng_in():
         print(sec)
         for wl in word_list :
             AC(self.run).send_keys(wl).perform()
-            sleep(sec)
+            time.sleep(sec)
 
 
 
@@ -259,20 +264,20 @@ class plng_in():
         self.run.set_page_load_timeout(10)
         url="http://www.ratatype.com/login/"
         self.run.get(url)
-        sleep(15)
+        time.sleep(15)
         self.run.execute_script('window.stop()')
-        sleep(3)
+        time.sleep(3)
         try:
             self.run.find_element_by_css_selector("#email")
         except NoSuchElementException :
-            self.error("網路異常")
+            self.error("網路延遲太高")
             self.run.quit()
         self.entry_word("#email",email,0.05)
-        sleep(0.5)
+        time.sleep(0.5)
         self.entry_word("#password",password,0.05)
-        sleep(0.5)
+        time.sleep(0.5)
         self.run.find_element_by_css_selector("#fauth > div.form-group.clearfix > button").click()
-        sleep(2)
+        time.sleep(2)
         try:
             self.run.find_element_by_css_selector("body > div.center > div > div > div > div.rightSide > div > div:nth-child(3)")
         except:
@@ -281,32 +286,32 @@ class plng_in():
         self.run.quit()
 
     def keystart(self) :
-        sleep(2)
+        time.sleep(2)
 
         self.run.find_element_by_css_selector("body > div.center > div > div.rightSide > div > div:nth-child(7) > div.nextExercise > form > button").click()
 
-        sleep(3)
+        time.sleep(3)
         self.run.find_element_by_css_selector("#ui-id-1 > button").click()
-        sleep(2)
+        time.sleep(2)
         html_doc=self.run.page_source
         soup = BeautifulSoup(html_doc, 'html.parser')
 
 
         w=(soup.find("div",{"id":"str_in"}).string)
-        sleep(3)
+        time.sleep(3)
 
 
 
         self.entry_key(w,65)
-        sleep(2)
+        time.sleep(2)
         self.run.save_screenshot(".\\data\\finish image\\{}.png".format(self._date()))
-        sleep(1)
-        self._close()
+        time.sleep(1)
+        self.close()
         #os.exit_(1)
 
     def is_(self):
-        self.close.destroy()
-        self._input_start()
+        self._close.destroy()
+        self.input_ep()
 
 
 
@@ -322,12 +327,13 @@ class plng_in():
 
 if __name__ == "__main__" :
     try :
-        pl=plng_in()
+        pl=Autocompleter()
+        pl.start()
     except BaseException as e :
         print(e)
-        sleep(5)
+        time.sleep(5)
 
-    sleep(3)
+    time.sleep(3)
 
 
 
