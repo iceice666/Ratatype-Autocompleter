@@ -31,10 +31,7 @@ class Autocompleter():
         return1 = subprocess.call('ping 8.8.8.8', shell = True, stdout = fnull, stderr = fnull)
         if return1:
             self.error("網路異常")
-        else:
-            print 'ping ok'
         fnull.close()
- 
 
     def start(self):
         self.msgbox()
