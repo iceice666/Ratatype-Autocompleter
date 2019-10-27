@@ -13,13 +13,52 @@ import sys
 import tkinter as tk
 import re
 import subprocess
-#            ----------------------  plng_in class START   ----------------------
 
 __version__="v.1.2_64bit"
 
 class Autocompleter():
-
     def __init__(self) :
+        lang_dict={
+        "lang":"zh-TW",
+        "error":{
+            "Network_exception":"網路異常",
+            "Network_delay_is_too_high":"網路延遲太高",
+            "Password_is_not_true":"密碼不正確"
+        },
+        "GUI_msgbox":{
+            "title":"警告",
+            "lab1":"警告",
+            "lab2":"此軟體僅用於測試",
+            "lab3":"要繼續嗎？",
+            "BTN_Continue_execution":"繼續執行",
+            "BTN_Close":"結束"
+        },
+        "GUI_input_ep":{
+            "title":"帳號密碼輸入",
+            "lab1":"Ratatype帳號密碼輸入",
+            "lab2":"帳號：",
+            "lab3":"密碼：",
+            "BTN_Start":"開始",
+            "email_input_default":"@kmhjh.kh.edu.tw"
+        },
+        "GUI_close":{
+            "title":"完成",
+            "lab1":"完成",
+            "lab2":"您已完成",
+            "lab3":"要繼續嗎？",
+            "BTN_Continue_execution":"繼續執行",
+            "BTN_Close":"結束"
+        },
+        "GUI_error":{
+            "title":"錯誤",
+            "lab1":"我們非常抱歉",
+            "lab2":"由於您的",
+            "lab3":"導致軟體無法正常進行",
+            "lab4":"請問您是要...",
+            "BTN_Restart":"重新啟動",
+            "BTN_Close":"結束"
+        }
+    }
         #PATH
         self.PATH=os.path.dirname(__file__)
         print(self.PATH)
@@ -28,15 +67,22 @@ class Autocompleter():
         self.chrome_options.add_argument('--hide-scrollbars')
         self.chrome_options.add_argument('blink-settings=imagesEnabled=false')
         fnull = open(os.devnull, 'w')
-        return1 = subprocess.call('ping 8.8.8.8', shell = True, stdout = fnull, stderr = fnull)
+        return1 = subprocess.call('ping 35.168.176.193', shell = True, stdout = fnull, stderr = fnull)
         if return1:
-            self.error("網路異常")
+            self.lang_dict=json.dumps(lang_dict)
+            self.error(self.lang_dict["lang"])
         fnull.close()
 
     def start(self):
         self.msgbox()
 
-    def _date(self):
+    def date(self):
+        i=None
+        _date=""
+        if i == None :
+            i+=1
+        elif i >= 1:
+            return _date
         #date
         today = time.localtime()
         year=today.tm_year
@@ -56,10 +102,10 @@ class Autocompleter():
         if sec < 10 :
             sec="0{sec}".format(sec=str(sec))
 
-        date="{year}{mon}{day}-{hour}{min}-{sec}".format(year=year,mon=mon,day=day,hour=hour,min=_min,sec=sec)
-        return date
+        _date="{year}{mon}{day}-{hour}{min}-{sec}".format(year=year,mon=mon,day=day,hour=hour,min=_min,sec=sec)
+        return _date
 
-    def _exit(self):
+    def exit(self):
         try:
             self.run.quit()
         except:
@@ -95,10 +141,10 @@ class Autocompleter():
         lab2.pack()
         lab3.pack()
         btn.pack()
-        btn1=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.input_ep)
-        btn2=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self._exit)
-        btn1.pack(side="left",padx=5)
-        btn2.pack(side="right")
+        btn_Continue_execution=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.input_ep)
+        btn_Close=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self.exit)
+        btn_Continue_execution.pack(side="left",padx=5)
+        btn_Close.pack(side="right")
         self._msgbox.geometry("%dx%d+%d+%d"%(220,115,((self._msgbox.winfo_screenwidth()/2)-(220/2)),((self._msgbox.winfo_screenheight()/2)-(115/2))))
         self._msgbox.mainloop()
 
@@ -124,7 +170,7 @@ class Autocompleter():
         lab3=tk.Label(_input,text="密碼：",font=("微軟正黑體",12))
         e_entry=tk.Entry(_input,font=("微軟正黑體",12),state=tk.NORMAL,textvariable=self.e_text,width=20)
         p_entry=tk.Entry(_input,font=("微軟正黑體",12),state=tk.NORMAL,textvariable=self.p_text,width=20,show="\u25CF")
-        p_entry.bind("<Return>",self.data_login_e)
+        p_entry.bind("<Return>",self._data_login_e)
         lab1.grid(row=0,column=1)
         lab2.grid(row=1,column=0)
         lab3.grid(row=2,column=0)
@@ -132,8 +178,8 @@ class Autocompleter():
         p_entry.grid(row=2,column=1,columnspan=2)
         btn=tk.Frame(self._start)
         btn.pack()
-        btn1=tk.Button(btn,text="開始",font=("微軟正黑體",12),command=self.data_login)
-        btn1.pack()
+        btn_Start=tk.Button(btn,text="開始",font=("微軟正黑體",12),command=self._data_login)
+        btn_Start.pack()
         self._start.geometry("%dx%d+%d+%d"%(250,115,((self._start.winfo_screenwidth()/2)-(250/2)),((self._start.winfo_screenheight()/2)-(115/2))))
         self._start.mainloop()
 
@@ -174,10 +220,10 @@ class Autocompleter():
         lab2.pack()
         lab3.pack()
         btn.pack()
-        btn1=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.is_)
-        btn2=tk.Button(btn,text="關閉",font=("微軟正黑體",12),command=self._exit)
-        btn1.pack(side="left",padx=5)
-        btn2.pack(side="right")
+        btn_Continue_execution=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.is_)
+        btn_Close=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self.exit)
+        btn_Continue_execution.pack(side="left",padx=5)
+        btn_Close.pack(side="right")
         self._close.geometry("%dx%d+%d+%d"%(220,115,((self._close.winfo_screenwidth()/2)-(220/2)),((self._close.winfo_screenheight()/2)-(115/2))))
         self._close.mainloop()
 
@@ -204,7 +250,7 @@ class Autocompleter():
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab1=tk.Label(_input,text="我們非常抱歉",font=("微軟正黑體",12))
-        lab2=tk.Label(_input,text="由於您的\"{}\"".format(msg),font=("微軟正黑體",12))
+        lab2=tk.Label(_input,text="由於您的"+"{}".format("\""+msg+"\""),font=("微軟正黑體",12))
         lab3=tk.Label(_input,text="導致軟體無法正常進行",font=("微軟正黑體",12))
         lab4=tk.Label(_input,text="請問您是要...",font=("微軟正黑體",12))
         lab1.pack()
@@ -212,10 +258,10 @@ class Autocompleter():
         lab3.pack()
         lab4.pack()
         btn.pack()
-        btn1=tk.Button(btn,text="重新啟動",font=("微軟正黑體",12),command=self.restart)
-        btn2=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self._exit)
-        btn1.pack(side="left",padx=5)
-        btn2.pack(side="right")
+        btn_restart=tk.Button(btn,text="重新啟動",font=("微軟正黑體",12),command=self.restart)
+        btn_close=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self.exit)
+        btn_restart.pack(side="left",padx=5)
+        btn_close.pack(side="right")
         self._tkerror.geometry("%dx%d+%d+%d"%(250,150,((self._tkerror.winfo_screenwidth()/2)-(250/2)),((self._tkerror.winfo_screenheight()/2)-(150/2))))
         self._tkerror.mainloop()
 
@@ -223,10 +269,10 @@ class Autocompleter():
         pass
         self.set=tk.Tk()
 
-    def data_login_e(self,event):
-        self.data_login()
+    def _data_login_e(self,event):
+        self._data_login()
 
-    def data_login(self):
+    def _data_login(self):
         self._start.destroy()
         self.login(self.e_text.get(),self.p_text.get())
 
@@ -301,7 +347,7 @@ class Autocompleter():
 
         self.entry_key(w,65)
         time.sleep(2)
-        self.run.save_screenshot(".\\data\\finish image\\{}.png".format(self._date()))
+        self.run.save_screenshot(".\\data\\finish image\\{}.png".format(self.date()))
         time.sleep(1)
         self.close()
         #os.exit_(1)
@@ -316,11 +362,6 @@ class Autocompleter():
 
 
 
-#            ---------------------- plng_in  class END   ----------------------
-
-
-
-#            ----------------------   netholiday auto do subject work START   ----------------------
 
 if __name__ == "__main__" :
     try :

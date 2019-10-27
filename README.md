@@ -6,8 +6,8 @@
 ### class Autocompleter()
 * **\_\_init\_\_**
 * **控制器**
-  * data_login_e(event)
-  * data_login()
+  * _data_login_e(event)
+  * _data_login()
 
 * **使用者介面**
   * start()
@@ -18,8 +18,8 @@
   * error()
 
 * **模組**
-  * _date()
-  * _exit()
+  * date()
+  * exit()
   * login(email,password)
   * keystart()
   * entry_word(css_selector,word,wait_sec)
@@ -42,14 +42,12 @@ __此程式會用到下列模組和函式：__
       * __expected_conditions__
       * wait
         * __WebDriverWait__
-
-
-
-* bs4  BeautifulSoup
-* time
-* json
-* os.path
-* os
-* sys
-* tkinter
-* re
+* bs4
+  * __BeautifulSoup__
+* __time__
+* __json__
+* __os.path__
+* __os__
+* __sys__
+* __tkinter__
+* __re__
