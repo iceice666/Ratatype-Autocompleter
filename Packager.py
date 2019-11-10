@@ -1,7 +1,10 @@
 import os
 import time
 import shutil as su
-from auto_do import __version__
+from auto_do import __version__ as ver
+
+__version__="0.1"
+
 #PATH
 PATH=os.path.dirname(__file__)
 today = time.localtime()
@@ -22,7 +25,7 @@ if _min < 10 :
 if sec < 10 :
     sec="0{sec}".format(sec=str(sec))
 date="{mon}{day}.{hour}{min}.{sec}".format(mon=mon,day=day,hour=hour,min=_min,sec=sec)
-pn="Ratatype_Autocompleter_{}".format(__version__)
+pn="Ratatype_Autocompleter_{}".format(ver)
 su.copytree(src="{}\\base data".format(PATH),dst="{}\\{}\\data".format(PATH,pn))
 os.system("pyinstaller -F {path}\\auto_do.py -i {path}\\icon.ico -n Autocompleter --distpath {PN} --specpath {path}\\spec".format(path=PATH,PN=pn))
 time.sleep(5)
