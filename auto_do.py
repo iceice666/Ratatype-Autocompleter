@@ -14,7 +14,7 @@ import tkinter as tk
 import re
 import subprocess
 
-__version__="v.1.2_64bit"
+__version__="v.1.2.1"
 
 class Autocompleter():
     def __init__(self) :
@@ -70,8 +70,13 @@ class Autocompleter():
         return1 = subprocess.call('ping 35.168.176.193', shell = True, stdout = fnull, stderr = fnull)
         if return1:
             self.lang_dict=json.dumps(lang_dict)
-            self.error(self.lang_dict["lang"])
+            self.error(self.get_dict_value(lang_dict,["error","Network_exception"]))
         fnull.close()
+
+    def get_dict_value(self,obj,pathlist):
+        for l in pathlist:
+            obj=obj[l]
+        return obj
 
     def start(self):
         self.msgbox()
@@ -151,7 +156,7 @@ class Autocompleter():
 
     def input_ep(self):
         try:
-            self.msgbox.destroy()
+            self._msgbox.destroy()
         except:
             pass
         self._start=tk.Tk()
@@ -162,7 +167,6 @@ class Autocompleter():
             self._start.iconbitmap(self.PATH+".\\data\\ico\\start.ico")
         self.e_text=tk.StringVar()
         self.p_text=tk.StringVar()
-        self.e_text.set("@kmhjh.kh.edu.tw")
         _input=tk.Frame(self._start)
         _input.pack()
         lab1=tk.Label(_input,text="Ratatype帳號密碼輸入",font=("微軟正黑體",12))
@@ -170,6 +174,7 @@ class Autocompleter():
         lab3=tk.Label(_input,text="密碼：",font=("微軟正黑體",12))
         e_entry=tk.Entry(_input,font=("微軟正黑體",12),state=tk.NORMAL,textvariable=self.e_text,width=20)
         p_entry=tk.Entry(_input,font=("微軟正黑體",12),state=tk.NORMAL,textvariable=self.p_text,width=20,show="\u25CF")
+        self.e_text.set("@kmhjh.kh.edu.tw")
         p_entry.bind("<Return>",self._data_login_e)
         lab1.grid(row=0,column=1)
         lab2.grid(row=1,column=0)
