@@ -18,7 +18,7 @@ __version__="v.1.2.1"
 
 class Autocompleter():
     def __init__(self) :
-        lang_dict={
+        self.lang_dict={
         "lang":"zh-TW",
         "error":{
             "Network_exception":"網路異常",
@@ -69,9 +69,9 @@ class Autocompleter():
         fnull = open(os.devnull, 'w')
         return1 = subprocess.call('ping 35.168.176.193', shell = True, stdout = fnull, stderr = fnull)
         if return1:
-            self.lang_dict=json.dumps(lang_dict)
-            self.error(self.get_dict_value(lang_dict,["error","Network_exception"]))
-        fnull.close()
+            self.error(self.get_dict_value(self.lang_dict,["error","Network_exception"]))
+        else:
+            fnull.close()
 
     def get_dict_value(self,obj,pathlist):
         for l in pathlist:
@@ -234,7 +234,10 @@ class Autocompleter():
 
 
     def error(self,msg):
-        self.run.quit()
+        try:
+            self.run.quit()
+        except:
+            pass
         self._tkerror=tk.Tk()
         self._tkerror.title("錯誤")
         try:
