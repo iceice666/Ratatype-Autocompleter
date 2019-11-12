@@ -13,55 +13,15 @@ import sys
 import tkinter as tk
 import re
 import subprocess
-
-__version__="v.1.2.1"
+import lang
+__version__="v.1.3"
 
 class Autocompleter():
     def __init__(self) :
-        self.lang_dict={
-        "lang":"zh-TW",
-        "error":{
-            "Network_exception":"網路異常",
-            "Network_delay_is_too_high":"網路延遲太高",
-            "Password_is_not_true":"密碼不正確"
-        },
-        "GUI_msgbox":{
-            "title":"警告",
-            "lab1":"警告",
-            "lab2":"此軟體僅用於測試",
-            "lab3":"要繼續嗎？",
-            "BTN_Continue_execution":"繼續執行",
-            "BTN_Close":"結束"
-        },
-        "GUI_input_ep":{
-            "title":"帳號密碼輸入",
-            "lab1":"Ratatype帳號密碼輸入",
-            "lab2":"帳號：",
-            "lab3":"密碼：",
-            "BTN_Start":"開始",
-            "email_input_default":"@kmhjh.kh.edu.tw"
-        },
-        "GUI_close":{
-            "title":"完成",
-            "lab1":"完成",
-            "lab2":"您已完成",
-            "lab3":"要繼續嗎？",
-            "BTN_Continue_execution":"繼續執行",
-            "BTN_Close":"結束"
-        },
-        "GUI_error":{
-            "title":"錯誤",
-            "lab1":"我們非常抱歉",
-            "lab2":"由於您的",
-            "lab3":"導致軟體無法正常進行",
-            "lab4":"請問您是要...",
-            "BTN_Restart":"重新啟動",
-            "BTN_Close":"結束"
-        }
-    }
+        ld=lang.langdict.zh_TW()
+        self.lang_dict=ld.__langDict__
         #PATH
         self.PATH=os.path.dirname(__file__)
-        print(self.PATH)
         self.chrome_options=webdriver.ChromeOptions()
         self.chrome_options.add_argument('--disable-gpu')
         self.chrome_options.add_argument('--hide-scrollbars')
@@ -74,6 +34,7 @@ class Autocompleter():
             fnull.close()
 
     def get_dict_value(self,obj,pathlist):
+        obj=dict(obj)
         for l in pathlist:
             obj=obj[l]
         return obj
@@ -125,7 +86,7 @@ class Autocompleter():
         try:
             self._msgbox.iconbitmap(".\\data\\ico\\war.ico")
         except:
-            self._msgbox.iconbitmap(self.PATH+".\\data\\ico\\war.ico")
+            self._msgbox.iconbitmap(self.PATH+"\\data\\ico\\war.ico")
         frm=tk.Frame(self._msgbox)
         frm.pack(side="right",padx=5)
         lab=tk.Frame(frm)
@@ -258,7 +219,7 @@ class Autocompleter():
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab1=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab1"]),font=("微軟正黑體",12))
-        lab2=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab2"])+"\"{}\"".format(msg),font=("微軟正黑體",12))
+        lab2=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab2_1"])+"\"{}\"".format(msg)+self.get_dict_value(self.lang_dict,["GUI_error","lab2_2"]),font=("微軟正黑體",12))
         lab3=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab3"]),font=("微軟正黑體",12))
         lab4=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab4"]),font=("微軟正黑體",12))
         lab1.pack()
@@ -266,8 +227,8 @@ class Autocompleter():
         lab3.pack()
         lab4.pack()
         btn.pack()
-        btn_restart=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_error","BTN_Restart"]),font=("微軟正黑體",12),font=("微軟正黑體",12),command=self.restart)
-        btn_close=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_error","BTN_Close"]),font=("微軟正黑體",12),font=("微軟正黑體",12),command=self.exit)
+        btn_restart=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_error","BTN_Restart"]),font=("微軟正黑體",12),command=self.restart)
+        btn_close=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_error","BTN_Close"]),font=("微軟正黑體",12),command=self.exit)
         btn_restart.pack(side="left",padx=5)
         btn_close.pack(side="right")
         self._tkerror.geometry("%dx%d+%d+%d"%(250,150,((self._tkerror.winfo_screenwidth()/2)-(250/2)),((self._tkerror.winfo_screenheight()/2)-(150/2))))
@@ -333,7 +294,7 @@ class Autocompleter():
             self.run.find_element_by_css_selector("body > div.center > div > div > div > div.rightSide > div > div:nth-child(3)")
         except:
             self.keystart()
-        self.error(self.get_dict_value(self.lang_dict,["error","Password_is_not_true"]))
+        self.error(self.get_dict_value(self.lang_dict,["error","Password_is_incorrect"]))
         self.run.quit()
 
     def keystart(self) :
@@ -372,14 +333,8 @@ class Autocompleter():
 
 
 if __name__ == "__main__" :
-    try :
-        pl=Autocompleter()
-        pl.start()
-    except BaseException as e :
-        print(e)
-        time.sleep(5)
-
-    time.sleep(3)
+    pl=Autocompleter()
+    pl.start()
 
 
 
