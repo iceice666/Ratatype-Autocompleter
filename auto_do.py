@@ -121,7 +121,7 @@ class Autocompleter():
     def msgbox(self):
         #tk
         self._msgbox=tk.Tk()
-        self._msgbox.title("警告")
+        self._msgbox.title(self.get_dict_value(self.lang_dict,["GUI_msgbox","title"]))
         try:
             self._msgbox.iconbitmap(".\\data\\ico\\war.ico")
         except:
@@ -139,15 +139,15 @@ class Autocompleter():
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab.pack()
-        lab1=tk.Label(lab,text="警告",font=("微軟正黑體",12))
-        lab2=tk.Label(lab,text="此軟體僅用於測試",font=("微軟正黑體",12))
-        lab3=tk.Label(lab,text="要繼續嗎？",font=("微軟正黑體",12))
+        lab1=tk.Label(lab,text=self.get_dict_value(self.lang_dict,["GUI_msgbox","lab1"]),font=("微軟正黑體",12))
+        lab2=tk.Label(lab,text=self.get_dict_value(self.lang_dict,["GUI_msgbox","lab2"]),font=("微軟正黑體",12))
+        lab3=tk.Label(lab,text=self.get_dict_value(self.lang_dict,["GUI_msgbox","lab3"]),font=("微軟正黑體",12))
         lab1.pack()
         lab2.pack()
         lab3.pack()
         btn.pack()
-        btn_Continue_execution=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.input_ep)
-        btn_Close=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self.exit)
+        btn_Continue_execution=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_msgbox","BTN_Continue_execution"]),font=("微軟正黑體",12),command=self.input_ep)
+        btn_Close=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_msgbox","BTN_Close"]),font=("微軟正黑體",12),command=self.exit)
         btn_Continue_execution.pack(side="left",padx=5)
         btn_Close.pack(side="right")
         self._msgbox.geometry("%dx%d+%d+%d"%(220,115,((self._msgbox.winfo_screenwidth()/2)-(220/2)),((self._msgbox.winfo_screenheight()/2)-(115/2))))
@@ -160,7 +160,7 @@ class Autocompleter():
         except:
             pass
         self._start=tk.Tk()
-        self._start.title("帳號密碼輸入")
+        self._start.title(self.get_dict_value(self.lang_dict,["GUI_input_ep","title"]))
         try:
             self._start.iconbitmap(".\\data\\ico\\start.ico")
         except:
@@ -169,12 +169,12 @@ class Autocompleter():
         self.p_text=tk.StringVar()
         _input=tk.Frame(self._start)
         _input.pack()
-        lab1=tk.Label(_input,text="Ratatype帳號密碼輸入",font=("微軟正黑體",12))
-        lab2=tk.Label(_input,text="帳號：",font=("微軟正黑體",12))
-        lab3=tk.Label(_input,text="密碼：",font=("微軟正黑體",12))
+        lab1=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_input_ep","lab1"]),font=("微軟正黑體",12))
+        lab2=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_input_ep","lab2"]),font=("微軟正黑體",12))
+        lab3=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_input_ep","lab3"]),font=("微軟正黑體",12))
         e_entry=tk.Entry(_input,font=("微軟正黑體",12),state=tk.NORMAL,textvariable=self.e_text,width=20)
         p_entry=tk.Entry(_input,font=("微軟正黑體",12),state=tk.NORMAL,textvariable=self.p_text,width=20,show="\u25CF")
-        self.e_text.set("@kmhjh.kh.edu.tw")
+        self.e_text.set(self.get_dict_value(self.lang_dict,["GUI_input_ep","email_input_default"]))
         p_entry.bind("<Return>",self._data_login_e)
         lab1.grid(row=0,column=1)
         lab2.grid(row=1,column=0)
@@ -183,7 +183,7 @@ class Autocompleter():
         p_entry.grid(row=2,column=1,columnspan=2)
         btn=tk.Frame(self._start)
         btn.pack()
-        btn_Start=tk.Button(btn,text="開始",font=("微軟正黑體",12),command=self._data_login)
+        btn_Start=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_input_ep","BTN_Start"]),font=("微軟正黑體",12),command=self._data_login)
         btn_Start.pack()
         self._start.geometry("%dx%d+%d+%d"%(250,115,((self._start.winfo_screenwidth()/2)-(250/2)),((self._start.winfo_screenheight()/2)-(115/2))))
         self._start.mainloop()
@@ -200,7 +200,7 @@ class Autocompleter():
         except:
             pass
         self._close=tk.Tk()
-        self._close.title("完成")
+        self._close.title(self.get_dict_value(self.lang_dict,["GUI_close","title"]))
         try:
             self._close.iconbitmap(".\\data\\ico\\war.ico")
         except:
@@ -218,15 +218,15 @@ class Autocompleter():
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab.pack()
-        lab1=tk.Label(lab,text="完成",font=("微軟正黑體",12))
-        lab2=tk.Label(lab,text="您已完成",font=("微軟正黑體",12))
-        lab3=tk.Label(lab,text="要繼續嗎？",font=("微軟正黑體",12))
+        lab1=tk.Label(lab,text=self.get_dict_value(self.lang_dict,["GUI_close","lab1"]),font=("微軟正黑體",12))
+        lab2=tk.Label(lab,text=self.get_dict_value(self.lang_dict,["GUI_close","lab2"]),font=("微軟正黑體",12))
+        lab3=tk.Label(lab,text=self.get_dict_value(self.lang_dict,["GUI_close","lab3"]),font=("微軟正黑體",12))
         lab1.pack()
         lab2.pack()
         lab3.pack()
         btn.pack()
-        btn_Continue_execution=tk.Button(btn,text="繼續執行",font=("微軟正黑體",12),command=self.is_)
-        btn_Close=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self.exit)
+        btn_Continue_execution=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_close","BTN_Continue_execution"]),font=("微軟正黑體",12),command=self.is_)
+        btn_Close=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_close","BTN_Close"]),font=("微軟正黑體",12),command=self.exit)
         btn_Continue_execution.pack(side="left",padx=5)
         btn_Close.pack(side="right")
         self._close.geometry("%dx%d+%d+%d"%(220,115,((self._close.winfo_screenwidth()/2)-(220/2)),((self._close.winfo_screenheight()/2)-(115/2))))
@@ -239,7 +239,7 @@ class Autocompleter():
         except:
             pass
         self._tkerror=tk.Tk()
-        self._tkerror.title("錯誤")
+        self._tkerror.title(self.get_dict_value(self.lang_dict,["GUI_error","title"]))
         try:
             self._tkerror.iconbitmap(".\\data\\ico\\error.ico")
         except:
@@ -257,17 +257,17 @@ class Autocompleter():
             image_=tk.PhotoImage(file=self.PATH+"\\data\\png\\error.png")
         img1=tk.Label(img,image=image_)
         img1.pack()
-        lab1=tk.Label(_input,text="我們非常抱歉",font=("微軟正黑體",12))
-        lab2=tk.Label(_input,text="由於您的"+"{}".format("\""+msg+"\""),font=("微軟正黑體",12))
-        lab3=tk.Label(_input,text="導致軟體無法正常進行",font=("微軟正黑體",12))
-        lab4=tk.Label(_input,text="請問您是要...",font=("微軟正黑體",12))
+        lab1=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab1"]),font=("微軟正黑體",12))
+        lab2=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab2"])+"\"{}\"".format(msg),font=("微軟正黑體",12))
+        lab3=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab3"]),font=("微軟正黑體",12))
+        lab4=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab4"]),font=("微軟正黑體",12))
         lab1.pack()
         lab2.pack()
         lab3.pack()
         lab4.pack()
         btn.pack()
-        btn_restart=tk.Button(btn,text="重新啟動",font=("微軟正黑體",12),command=self.restart)
-        btn_close=tk.Button(btn,text="結束",font=("微軟正黑體",12),command=self.exit)
+        btn_restart=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_error","BTN_Restart"]),font=("微軟正黑體",12),font=("微軟正黑體",12),command=self.restart)
+        btn_close=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_error","BTN_Close"]),font=("微軟正黑體",12),font=("微軟正黑體",12),command=self.exit)
         btn_restart.pack(side="left",padx=5)
         btn_close.pack(side="right")
         self._tkerror.geometry("%dx%d+%d+%d"%(250,150,((self._tkerror.winfo_screenwidth()/2)-(250/2)),((self._tkerror.winfo_screenheight()/2)-(150/2))))
@@ -321,7 +321,7 @@ class Autocompleter():
         try:
             self.run.find_element_by_css_selector("#email")
         except NoSuchElementException :
-            self.error("網路延遲太高")
+            self.error(self.get_dict_value(self.lang_dict,["error","Network_delay_is_too_high"]))
             self.run.quit()
         self.entry_word("#email",email,0.05)
         time.sleep(0.5)
@@ -333,7 +333,7 @@ class Autocompleter():
             self.run.find_element_by_css_selector("body > div.center > div > div > div > div.rightSide > div > div:nth-child(3)")
         except:
             self.keystart()
-        self.error("密碼不正確")
+        self.error(self.get_dict_value(self.lang_dict,["error","Password_is_not_true"]))
         self.run.quit()
 
     def keystart(self) :
