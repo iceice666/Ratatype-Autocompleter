@@ -26,7 +26,7 @@ if sec < 10 :
     sec="0{sec}".format(sec=str(sec))
 date="{mon}{day}.{hour}{min}.{sec}".format(mon=mon,day=day,hour=hour,min=_min,sec=sec)
 pn="Ratatype_Autocompleter_{}".format(ver)
-su.copytree(src="{}\\base data".format(PATH),dst="{}\\{}\\data".format(PATH,pn))
+su.copytree(src="{}\\base data".format(PATH),dst="{}\\{}\\assest".format(PATH,pn))
 os.system("pyinstaller -F {path}\\auto_do.py -i {path}\\icon.ico -n Autocompleter --distpath {PN} --specpath {path}\\spec".format(path=PATH,PN=pn))
 time.sleep(5)
 su.rmtree(path=PATH+"\\__pycache__")

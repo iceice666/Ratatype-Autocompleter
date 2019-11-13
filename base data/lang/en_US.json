@@ -1,0 +1,42 @@
+{
+    "lang": "en_US",
+    "error":{
+        "Network_exception": "Network exception",
+        "Network_delay_is_too_high": "The network delay is too high",
+        "Password_is_incorrect": "Password is incorrect"
+    },
+    "GUI_msgbox":{
+        "title": "warning",
+        "lab1": "Warning",
+        "lab2": "This software is only for testing",
+        "lab3": "Do you want to continue?",
+        "BTN_Continue_execution": "Continue to execute",
+        "BTN_Close": "Close"
+    },
+    "GUI_input_ep":{
+        "title": "account password input",
+        "lab1": "Ratatype account password input",
+        "lab2": "Account:",
+        "lab3": "Password:",
+        "BTN_Start": "Start",
+        "email_input_default":"@kmhjh.kh.edu.tw"
+    },
+    "GUI_close":{
+        "title": "Complete",
+        "lab1": "Complete",
+        "lab2": "You have completed",
+        "lab3": "Do you want to continue?",
+        "BTN_Continue_execution": "Continue to execute",
+        "BTN_Close": "Close"
+    },
+    "GUI_error":{
+        "title": "error",
+        "lab1": "We are very sorry",
+        "lab2_1": "Because of your",
+        "lab2_2":"problem",
+        "lab3": "The software is not working properly",
+        "lab4": "Excuse me, you want to...",
+        "BTN_Restart": "Restart",
+        "BTN_Close": "Close"
+    }
+}
