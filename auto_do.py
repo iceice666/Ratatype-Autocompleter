@@ -14,11 +14,11 @@ import tkinter as tk
 import re
 import subprocess
 import lang
-__version__="v.1.3"
+__version__="v.1.3.1"
 
 class Autocompleter():
     def __init__(self) :
-        ld=lang.langdict.zh_TW()
+        ld=lang.langdict.en_US()
         self.lang_dict=ld.__langDict__
         #PATH
         self.PATH=os.path.dirname(__file__)
@@ -77,16 +77,17 @@ class Autocompleter():
         except:
             pass
         finally:
-            os._exit(1)
+            sys.exit(0)
 
     def msgbox(self):
         #tk
         self._msgbox=tk.Tk()
         self._msgbox.title(self.get_dict_value(self.lang_dict,["GUI_msgbox","title"]))
+        self._msgbox.resizable(False, False)
         try:
-            self._msgbox.iconbitmap(".\\data\\ico\\war.ico")
+            self._msgbox.iconbitmap(".\\assest\\ico\\war.ico")
         except:
-            self._msgbox.iconbitmap(self.PATH+"\\data\\ico\\war.ico")
+            self._msgbox.iconbitmap(self.PATH+"\\assest\\ico\\war.ico")
         frm=tk.Frame(self._msgbox)
         frm.pack(side="right",padx=5)
         lab=tk.Frame(frm)
@@ -94,9 +95,9 @@ class Autocompleter():
         img=tk.Frame(self._msgbox)
         img.pack(side="left",padx=5)
         try:
-            image_=tk.PhotoImage(file=".\\data\\png\\war.png")
+            image_=tk.PhotoImage(file=".\\assest\\png\\war.png")
         except:
-            image_=tk.PhotoImage(file=self.PATH+"\\data\\png\\war.png")
+            image_=tk.PhotoImage(file=self.PATH+"\\assest\\png\\war.png")
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab.pack()
@@ -111,7 +112,7 @@ class Autocompleter():
         btn_Close=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_msgbox","BTN_Close"]),font=("微軟正黑體",12),command=self.exit)
         btn_Continue_execution.pack(side="left",padx=5)
         btn_Close.pack(side="right")
-        self._msgbox.geometry("%dx%d+%d+%d"%(220,115,((self._msgbox.winfo_screenwidth()/2)-(220/2)),((self._msgbox.winfo_screenheight()/2)-(115/2))))
+        self._msgbox.geometry("%dx%d+%d+%d"%(self._msgbox.winfo_reqwidth(),self._msgbox.winfo_reqheight(),((self._msgbox.winfo_screenwidth()/2)-(self._msgbox.winfo_reqwidth()/2)),((self._msgbox.winfo_screenheight()/2)-(self._msgbox.winfo_reqheight()/2))))
         self._msgbox.mainloop()
 
 
@@ -122,10 +123,11 @@ class Autocompleter():
             pass
         self._start=tk.Tk()
         self._start.title(self.get_dict_value(self.lang_dict,["GUI_input_ep","title"]))
+        self._start.resizable(False, False)
         try:
-            self._start.iconbitmap(".\\data\\ico\\start.ico")
+            self._start.iconbitmap(".\\assest\\ico\\start.ico")
         except:
-            self._start.iconbitmap(self.PATH+".\\data\\ico\\start.ico")
+            self._start.iconbitmap(self.PATH+".\\assest\\ico\\start.ico")
         self.e_text=tk.StringVar()
         self.p_text=tk.StringVar()
         _input=tk.Frame(self._start)
@@ -146,7 +148,7 @@ class Autocompleter():
         btn.pack()
         btn_Start=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_input_ep","BTN_Start"]),font=("微軟正黑體",12),command=self._data_login)
         btn_Start.pack()
-        self._start.geometry("%dx%d+%d+%d"%(250,115,((self._start.winfo_screenwidth()/2)-(250/2)),((self._start.winfo_screenheight()/2)-(115/2))))
+        self._start.geometry("%dx%d+%d+%d"%(self._start.winfo_reqwidth(),self._start.winfo_reqheight(),((self._start.winfo_screenwidth()/2)-(self._start.winfo_reqwidth()/2)),((self._start.winfo_screenheight()/2)-(self._start.winfo_reqheight()/2))))
         self._start.mainloop()
 
     def restart(self):
@@ -162,10 +164,11 @@ class Autocompleter():
             pass
         self._close=tk.Tk()
         self._close.title(self.get_dict_value(self.lang_dict,["GUI_close","title"]))
+        self._close.resizable(False, False)
         try:
-            self._close.iconbitmap(".\\data\\ico\\war.ico")
+            self._close.iconbitmap(".\\assest\\ico\\war.ico")
         except:
-            self._close.iconbitmap(self.PATH+".\\data\\ico\\war.ico")
+            self._close.iconbitmap(self.PATH+".\\assest\\ico\\war.ico")
         frm=tk.Frame(self._close)
         frm.pack(side="right",padx=5)
         lab=tk.Frame(frm)
@@ -173,9 +176,9 @@ class Autocompleter():
         img=tk.Frame(self._close)
         img.pack(side="left",padx=5)
         try:
-            image_=tk.PhotoImage(file=".\\data\\png\\war.png")
+            image_=tk.PhotoImage(file=".\\assest\\png\\war.png")
         except:
-            image_=tk.PhotoImage(file=self.PATH+"\\data\\png\\war.png")
+            image_=tk.PhotoImage(file=self.PATH+"\\assest\\png\\war.png")
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab.pack()
@@ -190,7 +193,7 @@ class Autocompleter():
         btn_Close=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_close","BTN_Close"]),font=("微軟正黑體",12),command=self.exit)
         btn_Continue_execution.pack(side="left",padx=5)
         btn_Close.pack(side="right")
-        self._close.geometry("%dx%d+%d+%d"%(220,115,((self._close.winfo_screenwidth()/2)-(220/2)),((self._close.winfo_screenheight()/2)-(115/2))))
+        self._close.geometry()
         self._close.mainloop()
 
 
@@ -201,10 +204,11 @@ class Autocompleter():
             pass
         self._tkerror=tk.Tk()
         self._tkerror.title(self.get_dict_value(self.lang_dict,["GUI_error","title"]))
+        self._tkerror.resizable(False, False)
         try:
-            self._tkerror.iconbitmap(".\\data\\ico\\error.ico")
+            self._tkerror.iconbitmap(".\\assest\\ico\\error.ico")
         except:
-            self._tkerror.iconbitmap(self.PATH+".\\data\\ico\\start.ico")
+            self._tkerror.iconbitmap(self.PATH+".\\assest\\ico\\start.ico")
         frm=tk.Frame(self._tkerror)
         img=tk.Frame(self._tkerror)
         img.pack(side="left",padx=5)
@@ -213,9 +217,9 @@ class Autocompleter():
         _input.pack()
         btn=tk.Frame(frm)
         try:
-            image_=tk.PhotoImage(file=".\\data\\png\\error.png")
+            image_=tk.PhotoImage(file=".\\assest\\png\\error.png")
         except:
-            image_=tk.PhotoImage(file=self.PATH+"\\data\\png\\error.png")
+            image_=tk.PhotoImage(file=self.PATH+"\\assest\\png\\error.png")
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab1=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab1"]),font=("微軟正黑體",12))
@@ -231,7 +235,7 @@ class Autocompleter():
         btn_close=tk.Button(btn,text=self.get_dict_value(self.lang_dict,["GUI_error","BTN_Close"]),font=("微軟正黑體",12),command=self.exit)
         btn_restart.pack(side="left",padx=5)
         btn_close.pack(side="right")
-        self._tkerror.geometry("%dx%d+%d+%d"%(250,150,((self._tkerror.winfo_screenwidth()/2)-(250/2)),((self._tkerror.winfo_screenheight()/2)-(150/2))))
+        self._tkerror.geometry()
         self._tkerror.mainloop()
 
     def settings(self):
@@ -239,7 +243,7 @@ class Autocompleter():
         self.set=tk.Tk()
 
     def _data_login_e(self,event):
-        self._data_login()
+        self._assest_login()
 
     def _data_login(self):
         self._start.destroy()
@@ -268,9 +272,9 @@ class Autocompleter():
 
     def login(self,email,password) :
         try:
-            self.run=webdriver.Chrome(executable_path=".\\data\\chromedriver.exe",chrome_options=self.chrome_options)
+            self.run=webdriver.Chrome(executable_path=".\\assest\\chromedriver.exe",chrome_options=self.chrome_options)
         except:
-            self.run=webdriver.Chrome(executable_path=self.PATH+".\\data\\chromedriver.exe",chrome_options=self.chrome_options)
+            self.run=webdriver.Chrome(executable_path=self.PATH+".\\assest\\chromedriver.exe",chrome_options=self.chrome_options)
 
         self.run.maximize_window()
         self.run.set_page_load_timeout(10)
@@ -316,7 +320,7 @@ class Autocompleter():
 
         self.entry_key(w,65)
         time.sleep(2)
-        self.run.save_screenshot(".\\data\\finish image\\{}.png".format(self.date()))
+        self.run.save_screenshot(".\\assest\\finish image\\{}.png".format(self.date()))
         time.sleep(1)
         self.close()
         #os.exit_(1)
@@ -333,8 +337,14 @@ class Autocompleter():
 
 
 if __name__ == "__main__" :
-    pl=Autocompleter()
-    pl.start()
+    try:
+        pl=Autocompleter()
+        pl.start()
+    except Exception as e:
+        if type(e) == SystemExit:
+            pass
+        else:
+            print(e)
 
 
 
