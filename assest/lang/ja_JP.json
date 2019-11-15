@@ -1,0 +1,42 @@
+{
+    "lang":"en_US",
+    "error":{
+        "Network_exception":"ネットワーク例外",
+        "Network_delay_is_too_high": "ネットワーク遅延が大きすぎる",
+        "Password_is_incorrect":"パスワードが間違っています"
+    },
+    "GUI_msgbox":{
+        "title":"警告",
+        "lab1":"警告",
+        "lab2": "このソフトウェアはテスト専用です",
+        "lab3": "続行しますか？",
+        "BTN_Continue_execution":"実行を継続",
+        "BTN_Close":"閉じる"
+    },
+    "GUI_input_ep":{
+        "title":"アカウントパスワード入力",
+        "lab1":"Ratatypeアカウントのパスワード入力",
+        "lab2":"アカウント:",
+        "lab3":"パスワード:",
+        "BTN_Start":"開始",
+        "email_input_default":"@ kmhjh.kh.edu.tw"
+    },
+    "GUI_close":{
+        "title":"完了",
+        "lab1":"完了",
+        "lab2":"完了しました",
+        "lab3": "続行しますか？",
+        "BTN_Continue_execution":"実行を継続",
+        "BTN_Close":"閉じる"
+    },
+    "GUI_error":{
+        "title":"エラー",
+        "lab1":"ごめんなさい",
+        "lab2_1":"あなたのため",
+        "lab2_2":"問題",
+        "lab3":"ソフトウェアが正常に動作していません",
+        "lab4": "すみません,あなたは...",
+        "BTN_Restart":"再起動",
+        "BTN_Close":"閉じる"
+    }
+}
