@@ -11,17 +11,19 @@ import os.path
 import os
 import sys
 import tkinter as tk
+from tkinter import ttk
 import re
 import subprocess
-import lang
+from lang import *
+from switch import switch
+
 __version__="v.1.3.1"
 
 class Autocompleter():
     def __init__(self) :
-        ld=lang.langdict.zh_TW()
-        self.lang_dict=ld.__langDict__
         #PATH
         self.PATH=os.path.dirname(__file__)
+        self.sellang()
         self.chrome_options=webdriver.ChromeOptions()
         self.chrome_options.add_argument('--disable-gpu')
         self.chrome_options.add_argument('--hide-scrollbars')
@@ -74,10 +76,63 @@ class Autocompleter():
     def exit(self):
         try:
             self.run.quit()
+            self._sellang.destroy()
+            self._msgbox.destroy()
+            self._close.destroy()
+            self._tkerror.destroy()
         except:
             pass
         finally:
             sys.exit(0)
+
+    def sellang(self):
+        with open(file="{}\\assest\\lang\\list.json".format(self.PATH),mode="r",encoding="utf-8") as f:
+            self.__langList__=dict(json.load(f))
+
+        self._sellang=tk.Tk()
+        self._sellang.title("Select Language")
+        self._sellang.iconbitmap(self.PATH+"\\assest\\ico\\war.ico")
+        frm=tk.Frame(self._sellang)
+        frm.pack(side="right",padx=5)
+        lab=tk.Frame(frm)
+        btn=tk.Frame(frm)
+        lab.pack()
+        btn.pack()
+        lab1=tk.Label(lab,text="Select Language",font=("微軟正黑體",12))
+        lab1.pack()
+        self.comlist=tk.StringVar()
+        com1=ttk.Combobox(lab,textvariable=self.comlist)
+        ll=[]
+        for i in self.__langList__.keys():
+            ll.append(self.__langList__[i])
+        com1["values"]=ll
+        com1.current(0)
+        com1.pack()
+        btn_Continue_execution=tk.Button(btn,text="Next",font=("微軟正黑體",12),command=self.next)
+        btn_Close=tk.Button(btn,text="Close",font=("微軟正黑體",12),command=self.exit)
+        btn_Continue_execution.pack(side="left",padx=5)
+        btn_Close.pack(side="right")
+        self._sellang.geometry()
+        self._sellang.mainloop()
+
+    def next(self):
+        self._sellang.destroy()
+        cl={}
+        for i in self.__langList__.keys():
+            cl[self.__langList__[i]]=i
+
+        for case in switch(cl[self.comlist.get()]):
+            if case("en_US"):
+                self.lang_dict=en_US().__langDict__
+                break
+            if case("zh_TW"):
+                self.lang_dict=zh_TW().__langDict__
+                break
+            if case("ja_JP"):
+                self.lang_dict=ja_JP().__langDict__
+                break
+            if case():
+                self.lang_dict=en_US().__langDict__
 
     def msgbox(self):
         #tk
@@ -91,10 +146,7 @@ class Autocompleter():
         btn=tk.Frame(frm)
         img=tk.Frame(self._msgbox)
         img.pack(side="left",padx=5)
-        try:
-            image_=tk.PhotoImage(file=".\\assest\\png\\war.png")
-        except:
-            image_=tk.PhotoImage(file=self.PATH+"\\assest\\png\\war.png")
+        image_=tk.PhotoImage(file=self.PATH+"\\assest\\png\\war.png")
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab.pack()
@@ -201,10 +253,7 @@ class Autocompleter():
         _input=tk.Frame(frm)
         _input.pack()
         btn=tk.Frame(frm)
-        try:
-            image_=tk.PhotoImage(file=".\\assest\\png\\error.png")
-        except:
-            image_=tk.PhotoImage(file=self.PATH+"\\assest\\png\\error.png")
+        image_=tk.PhotoImage(file=self.PATH+"\\assest\\png\\error.png")
         img1=tk.Label(img,image=image_)
         img1.pack()
         lab1=tk.Label(_input,text=self.get_dict_value(self.lang_dict,["GUI_error","lab1"]),font=("微軟正黑體",12))
@@ -228,7 +277,7 @@ class Autocompleter():
         self.set=tk.Tk()
 
     def _data_login_e(self,event):
-        self._assest_login()
+        self._data_login()
 
     def _data_login(self):
         self._start.destroy()

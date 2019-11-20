@@ -10,8 +10,8 @@
         "lab1": "Warning",
         "lab2": "This software is only for testing",
         "lab3": "Do you want to continue?",
-        "BTN_Continue_execution": "Continue to execute",
-        "BTN_Close": "Close"
+        "BTN_Continue_execution": "Yes, continue to execute",
+        "BTN_Close": "No, close"
     },
     "GUI_input_ep":{
         "title": "account password input",
@@ -26,8 +26,8 @@
         "lab1": "Complete",
         "lab2": "You have completed",
         "lab3": "Do you want to continue?",
-        "BTN_Continue_execution": "Continue to execute",
-        "BTN_Close": "Close"
+        "BTN_Continue_execution": "Yes, continue to execute",
+        "BTN_Close": "No, close"
     },
     "GUI_error":{
         "title": "error",
