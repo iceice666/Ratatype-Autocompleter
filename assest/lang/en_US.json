@@ -3,7 +3,8 @@
     "error":{
         "Network_exception": "Network exception",
         "Network_delay_is_too_high": "The network delay is too high",
-        "Password_is_incorrect": "Password is incorrect"
+        "Password_is_incorrect": "Password is incorrect",
+        "Website_was_updated":"Website was updated"
     },
     "GUI_msgbox":{
         "title": "warning",

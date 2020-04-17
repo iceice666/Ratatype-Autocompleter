@@ -17,7 +17,7 @@ import subprocess
 from lang import *
 from switch import switch
 
-__version__="v.1.3.1"
+__version__="v.1.4"
 
 class Autocompleter():
     def __init__(self) :
@@ -45,9 +45,9 @@ class Autocompleter():
         self.msgbox()
 
     def date(self):
-        i=None
+        i=0
         _date=""
-        if i == None :
+        if i == 0 :
             i+=1
         elif i >= 1:
             return _date
@@ -164,7 +164,6 @@ class Autocompleter():
         self._msgbox.geometry()
         self._msgbox.mainloop()
 
-
     def input_ep(self):
         try:
             self._msgbox.destroy()
@@ -201,8 +200,6 @@ class Autocompleter():
         self._tkerror.destroy()
         self.input_ep()
 
-
-
     def close(self) :
         try:
             self.run.quit()
@@ -235,7 +232,6 @@ class Autocompleter():
         btn_Close.pack(side="right")
         self._close.geometry()
         self._close.mainloop()
-
 
     def error(self,msg):
         try:
@@ -281,8 +277,9 @@ class Autocompleter():
 
     def _data_login(self):
         self._start.destroy()
-        self.login(self.e_text.get(),self.p_text.get())
-
+        self.ac=self.e_text.get()
+        self.pw=self.p_text.get()
+        self.login(self.ac,self.pw)
 
     def entry_word(self,css_selector,word,wait_sec) :
         #輸入文字
@@ -300,9 +297,6 @@ class Autocompleter():
         for wl in word_list :
             AC(self.run).send_keys(wl).perform()
             time.sleep(sec)
-
-
-
 
     def login(self,email,password) :
         self.run=webdriver.Chrome(executable_path=self.PATH+".\\assest\\chromedriver.exe",chrome_options=self.chrome_options)
@@ -322,7 +316,10 @@ class Autocompleter():
         time.sleep(0.5)
         self.entry_word("#password",password,0.05)
         time.sleep(0.5)
-        self.run.find_element_by_css_selector("#fauth > div.form-group.clearfix > button").click()
+        try:
+            self.run.find_element_by_css_selector("#fauth > div.form-group.btn-group-auth > button").click()
+        except NoSuchElementException:
+            self.error(self.get_dict_value(self.lang_dict,["error","Website_was_updated"]))
         time.sleep(2)
         try:
             self.run.find_element_by_css_selector("body > div.center > div > div > div > div.rightSide > div > div:nth-child(3)")
@@ -348,7 +345,7 @@ class Autocompleter():
 
 
 
-        self.entry_key(w,65)
+        self.entry_key(w,105)
         time.sleep(2)
         self.run.save_screenshot(".\\assest\\finish image\\{}.png".format(self.date()))
         time.sleep(1)
@@ -357,7 +354,7 @@ class Autocompleter():
 
     def is_(self):
         self._close.destroy()
-        self.input_ep()
+        self.login(self.ac,self.pw)
 
 
 

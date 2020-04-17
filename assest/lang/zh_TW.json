@@ -3,7 +3,8 @@
     "error":{
         "Network_exception":"網路異常",
         "Network_delay_is_too_high":"網路延遲太高",
-        "Password_is_not_true":"密碼不正確"
+        "Password_is_not_true":"密碼不正確",
+        "Website_was_updated":"該網頁已更新"
     },
     "GUI_msgbox":{
         "title":"警告",
