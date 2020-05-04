@@ -322,7 +322,7 @@ class Autocompleter():
         time.sleep(0.5)
         self.entry_word("#password",password,0.05)
         time.sleep(0.5)
-        self.run.find_element_by_css_selector("#fauth > div.form-group.clearfix > button").click()
+        self.run.find_element_by_css_selector("#fauth > div.form-group.btn-group-auth > button").click()
         time.sleep(2)
         try:
             self.run.find_element_by_css_selector("body > div.center > div > div > div > div.rightSide > div > div:nth-child(3)")
@@ -348,7 +348,7 @@ class Autocompleter():
 
 
 
-        self.entry_key(w,65)
+        self.entry_key(w,100)
         time.sleep(2)
         self.run.save_screenshot(".\\assest\\finish image\\{}.png".format(self.date()))
         time.sleep(1)
