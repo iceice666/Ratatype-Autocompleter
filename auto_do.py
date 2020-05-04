@@ -316,10 +316,14 @@ class Autocompleter():
         time.sleep(0.5)
         self.entry_word("#password",password,0.05)
         time.sleep(0.5)
+<<<<<<< HEAD
         try:
             self.run.find_element_by_css_selector("#fauth > div.form-group.btn-group-auth > button").click()
         except NoSuchElementException:
             self.error(self.get_dict_value(self.lang_dict,["error","Website_was_updated"]))
+=======
+        self.run.find_element_by_css_selector("#fauth > div.form-group.btn-group-auth > button").click()
+>>>>>>> 4e0fcf74f1aff7304049b10eae1654cd60a66f14
         time.sleep(2)
         try:
             self.run.find_element_by_css_selector("body > div.center > div > div > div > div.rightSide > div > div:nth-child(3)")
@@ -345,7 +349,11 @@ class Autocompleter():
 
 
 
+<<<<<<< HEAD
         self.entry_key(w,105)
+=======
+        self.entry_key(w,100)
+>>>>>>> 4e0fcf74f1aff7304049b10eae1654cd60a66f14
         time.sleep(2)
         self.run.save_screenshot(".\\assest\\finish image\\{}.png".format(self.date()))
         time.sleep(1)
